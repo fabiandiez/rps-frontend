@@ -1,0 +1,53 @@
+<div *ngIf="match; else spinner1">
+  <div class="py-10 text-8xl">
+    Round {{match.currentRound}}
+  </div>
+  <div class="py-10 grid grid-cols-2">
+
+    <div class="py-30 grid grid-cols-1">
+      <div>
+        My Score: {{match.myScore}}
+      </div>
+      <div class="py-40 text-9xl" *ngIf="match.myMove">
+        <div>
+          {{mapMove(match.myMove)}}
+        </div>
+        <div class="text-2xl font-normal py-2">
+          My Move
+        </div>
+      </div>
+      <div *ngIf="!match.myMove || match.myMove && match.opponentMove">
+        <button class="bg-transparent hover:shadow-lg focus:bg-transparent focus:shadow-lg focus:outline-none focus:ring-0 active:bg-transparent active:shadow-lg transition duration-150 ease-in-out text-white font-bold py-2 px-4 mx-10 rounded" (click)="playMove('ROCK')">🪨</button>
+        <button class="bg-transparent hover:shadow-lg focus:bg-transparent focus:shadow-lg focus:outline-none focus:ring-0 active:bg-transparent active:shadow-lg transition duration-150 ease-in-out text-white font-bold py-2 px-4 mx-10 rounded" (click)="playMove('PAPER')">📜</button>
+        <button class="bg-transparent hover:shadow-lg focus:bg-transparent focus:shadow-lg focus:outline-none focus:ring-0 active:bg-transparent active:shadow-lg transition duration-150 ease-in-out text-white font-bold py-2 px-4 mx-10 rounded" (click)="playMove('SCISSORS')">✂️</button>
+      </div>
+    </div>
+    <div class="py-30">
+      <div>
+        Opponent's Score: {{match.opponentScore}}
+      </div>
+      <div class="py-40 text-9xl" *ngIf="match.opponentMove; else spinner2">
+        <div>
+          {{mapMove(match.opponentMove)}}
+        </div>
+        <div class="text-2xl font-normal py-2">
+          Opponent's Move
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #spinner1>
+  <div class="grid h-screen place-items-center">
+    <div class="py-40 text-8xl animate-spin inline-block w-30 h-30 rounded-full" role="status">
+      🪨
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #spinner2>
+  <div class="py-40 text-8xl animate-spin inline-block w-30 h-30 rounded-full" role="status">
+    ✂️
+  </div>
+</ng-template>
